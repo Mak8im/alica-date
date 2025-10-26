@@ -1,1 +1,112 @@
 
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Калькулятор даты</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #a8edea, #fed6e3);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .container {
+    background: white;
+    padding: 30px 40px;
+    border-radius: 20px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    text-align: center;
+    max-width: 400px;
+  }
+  h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  select, button {
+    font-size: 18px;
+    margin: 10px;
+    padding: 8px 12px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+  }
+  button {
+    background: #4CAF50;
+    color: white;
+    cursor: pointer;
+  }
+  button:hover {
+    background: #45a049;
+  }
+  .result {
+    margin-top: 20px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <h1>Калькулятор деления даты</h1>
+
+    <div>
+      <label>День:</label>
+      <select id="day">
+        <script>
+          for (let i = 1; i <= 31; i++) {
+            document.write(`<option value="${i}">${i}</option>`);
+          }
+        </script>
+      </select>
+
+      <label>Месяц:</label>
+      <select id="month">
+        <option value="01">Январь</option>
+        <option value="02">Февраль</option>
+        <option value="03">Март</option>
+        <option value="04">Апрель</option>
+        <option value="05">Май</option>
+        <option value="06">Июнь</option>
+        <option value="07">Июль</option>
+        <option value="08">Август</option>
+        <option value="09">Сентябрь</option>
+        <option value="10">Октябрь</option>
+        <option value="11">Ноябрь</option>
+        <option value="12">Декабрь</option>
+      </select>
+    </div>
+
+    <button onclick="calculate()">Посчитать</button>
+
+    <div class="result" id="result"></div>
+  </div>
+
+  <script>
+    const monthNames = [
+      "Января", "Февраля", "Марта", "Апреля", "Мая", "Июня",
+      "Июля", "Августа", "Сентября", "Октября", "Ноября", "Декабря"
+    ];
+
+    function calculate() {
+      const day = parseInt(document.getElementById('day').value);
+      const month = document.getElementById('month').value;
+      const monthIndex = parseInt(month) - 1;
+
+      // Теперь месяц всегда двухзначный
+      const dateValue = parseFloat(`${day}.${month}`);
+      const number = (dateValue * 50).toFixed(0);
+      const divisionResult = (number / 50).toFixed(2);
+      const formattedDate = `${day} ${monthNames[monthIndex]}`;
+
+      document.getElementById('result').innerHTML = `
+        <div>${number} ÷ 50 = ${divisionResult}</div>
+        <div>→ ${formattedDate}</div>
+      `;
+    }
+  </script>
+</body>
+</html>
